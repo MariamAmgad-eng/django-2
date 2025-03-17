@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Trainee List</h2>
+<ul>
+    {% for trainee in trainees %}
+        <li>{{ trainee.name }} - 
+            <a href="{% url 'update_trainee' trainee.id %}">Edit</a> | 
+            <a href="{% url 'delete_trainee' trainee.id %}">Delete</a>
+        </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'add_trainee' %}">Add Trainee</a>
+
+</body>
+</html>
