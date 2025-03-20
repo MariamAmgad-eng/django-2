@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <h2>Trainee List</h2>
+<ul>
+    {% for trainee in trainees %}
+        <li>{{ trainee.name }} - 
+            <a href="{% url 'update_trainee' trainee.id %}">Edit</a> | 
+            <a href="{% url 'delete_trainee' trainee.id %}">Delete</a>
+        </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'add_trainee' %}">Add Trainee</a> -->
+
+
+<!-- >>>>>>>>list view>>>>>>>>> -->
+{% extends "base.html" %}
+{% block content %}
+<h2>List of Trainees</h2>
+<a href="{% url 'trainee_add' %}">Add New Trainee</a>
+<ul>
+    {% for trainee in trainees %}
+        <li>
+            {{ trainee.name }} - {{ trainee.email }} - {{ trainee.phone }} 
+            <a href="{% url 'trainee_update' trainee.id %}">Edit</a> | 
+            <a href="{% url 'trainee_delete' trainee.id %}">Delete</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
+
+
+</body>
+</html>
