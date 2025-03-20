@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'trainee',
     'course',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -49,14 +50,17 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware', 
 ]
+MIDDLEWARE.append('your_app.middleware.LoginRequiredMiddleware')
+
 
 ROOT_URLCONF = 'ITIan.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'], 
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Add this line
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -133,5 +137,9 @@ import os
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 #MEDIA_ROOT = BASE_DIR / 'media'
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'trainee_list'
+LOGOUT_REDIRECT_URL = 'login'
+
+LOGIN_URL = '/accounts/login/'  # Redirects unauthorized users to login page
+LOGIN_REDIRECT_URL = '/'  # Redirects logged-in users after login
+LOGOUT_REDIRECT_URL = '/accounts/login/'  # Redirects users after logout
