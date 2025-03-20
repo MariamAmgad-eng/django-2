@@ -6,13 +6,14 @@
     <title>Document</title>
 </head>
 <body>
-    <nav>
-        <a href="{% url 'trainee_list' %}">Trainees</a>
-        <a href="{% url 'add_trainee' %}">Add Trainee</a>
-        <a href="{% url 'login' %}">Login</a>
-        <a href="{% url 'logout' %}">Logout</a>
-        <a href="{% url 'register' %}">Register</a>
-    </nav>
+    <header>
+        {% if user.is_authenticated %}
+            <p>Welcome, {{ user.username }}!</p>
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+        {% endif %}
+    </header>
     
 </body>
 </html>
